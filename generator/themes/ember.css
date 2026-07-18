@@ -1,0 +1,30 @@
+/* Ember — dark warm background with orange glow */
+:root {
+  --bg:         #0d0500;
+  --surface:    #1c0e00;
+  --surface-2:  #150a00;
+  --surface-3:  #0a0300;
+  --border:     #2a1200;
+  --border-sm:  #1e0c00;
+  --text:       #fff7ed;
+  --muted:      #fdba74;
+  --dim:        #c2703a;
+  --faint:      #7c2d12;
+  --badge-bg:   #1c0e00;
+  --code-bg:    #050200;
+  --code-text:  #fff7ed;
+  --code-inline-bg:   #1c0e00;
+  --code-inline-text: #fdba74;
+  --shadow:     0 0 50px rgba(249,115,22,0.1);
+
+  --bg-card:    #1c0e00;
+  --bg-code:    #050200;
+  --text-dim:   #c2703a;
+  --panel:      #150a00;
+  --bg-steps:   #0e0600;
+  --accent:     #7c2d12;
+  --accent-lt:  #1c0e00;
+  --accent-md:  #fdba74;
+  --accent-dim: #431407;
+  --accent-dk:  #c2703a;
+}

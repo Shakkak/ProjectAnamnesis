@@ -1,0 +1,30 @@
+/* Nord — light Arctic palette: clean white surface, deep blue-gray text */
+:root {
+  --bg:         #eceff4;
+  --surface:    #ffffff;
+  --surface-2:  #f2f5f9;
+  --surface-3:  #e5e9f0;
+  --border:     #d8dee9;
+  --border-sm:  #e5e9f0;
+  --text:       #2e3440;
+  --muted:      #4c566a;
+  --dim:        #7b88a8;
+  --faint:      #9aa5b8;
+  --badge-bg:   #e5e9f0;
+  --code-bg:    #2e3440;
+  --code-text:  #eceff4;
+  --code-inline-bg:   #e5e9f0;
+  --code-inline-text: #2e3440;
+  --shadow:     0 1px 8px rgba(46,52,64,0.08);
+
+  --bg-card:    #ffffff;
+  --bg-code:    #2e3440;
+  --text-dim:   #7b88a8;
+  --panel:      #f2f5f9;
+  --bg-steps:   #e5e9f0;
+  --accent:     #5e81ac;
+  --accent-lt:  #d8dee9;
+  --accent-md:  #4c566a;
+  --accent-dim: #81a1c1;
+  --accent-dk:  #4c566a;
+}

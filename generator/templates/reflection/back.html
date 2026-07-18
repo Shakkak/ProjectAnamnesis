@@ -1,0 +1,97 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;700&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-back">
+  <div class="prompt-recap" dir="rtl" id="prompt-recap">{{Definition}}</div>
+  <div class="type-result">{{type:Learnable}}</div>
+  <div class="answer-row">
+    <div class="answer-label">Answer</div>
+    <div class="english-word">{{Learnable}}</div>
+    {{#Extra 2}}
+    <div class="ipa">/ {{Extra 2}} /</div>
+    {{/Extra 2}}
+  </div>
+  {{#Extra}}
+  <div class="details" id="details-block">{{Extra}}</div>
+  {{/Extra}}
+  <a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">Made with ProjectAnamnesis</a>
+</div>
+
+<script>
+(function () {
+  var el = document.getElementById('details-block');
+  if (el) {
+    if (!/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) {
+      var text = el.innerHTML
+        .replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      var lines = text.split('\n');
+      var out = '';
+      var section = '';
+      var inMeanings = false;
+      var sawDefinition = false;
+      lines.forEach(function (line) {
+        var t = line.trim();
+        if (!t) { out += '<div class="d-gap"></div>'; return; }
+        var hasIPA    = /[ˈˌ]/.test(t);
+        var hasEmDash = /—/.test(t);
+        if (hasIPA && hasEmDash) {
+          var parts = t.split(' — ');
+          var wp = (parts[0] || '').trim();
+          var m = wp.match(/^(.+?)\s+(\/[^\s\/][^\/]*\/)$/);
+          var word = m ? m[1] : wp, ipa = m ? m[2] : '';
+          var pos = parts[1] ? parts[1].trim() : '';
+          var def = parts.length > 2 ? parts.slice(2).join(' — ').trim() : '';
+          out += '<div class="wf-entry"><div class="wf-meta">'
+            + '<span class="wf-word">' + word + '</span>'
+            + (ipa ? '<span class="wf-ipa">' + ipa + '</span>' : '')
+            + (pos ? '<span class="wf-pos">' + pos + '</span>' : '')
+            + '</div>' + (def ? '<div class="wf-def">' + def + '</div>' : '') + '</div>';
+          return;
+        }
+        if (hasEmDash && /—\s*synonym/i.test(t)) {
+          out += '<div class="d-synonyms">' + t + '</div>';
+          return;
+        }
+        if (/^Example:\s+/i.test(t)) {
+          out += '<div class="wf-example">' + t.replace(/^Example:\s*/i, '') + '</div>';
+          return;
+        }
+        var sentenceStart = /^(The |A |An |His |Her |It |They |We |In |At |On |By |For |Government |University )/.test(t);
+        var isHeader = t.length <= 60 && !hasIPA && !hasEmDash && !sentenceStart && !/[.!?]$/.test(t);
+        if (isHeader) {
+          section = t.toLowerCase();
+          inMeanings = (section === 'meanings' || section === 'meaning');
+          sawDefinition = false;
+          out += '<div class="d-head">' + t + '</div>';
+          return;
+        }
+        if (inMeanings) {
+          if (!sawDefinition && /^(noun|adjective|verb|adverb|pronoun|preposition|conjunction|phrase|idiom|abbreviation)[\s:,]/.test(t)) {
+            sawDefinition = true;
+            out += '<div class="d-line">' + t + '</div>';
+            return;
+          }
+          if (sawDefinition) { out += '<div class="d-example">' + t + '</div>'; return; }
+        }
+        if (section.indexOf('example') !== -1) {
+          out += '<div class="d-example">' + t + '</div>';
+          return;
+        }
+        out += '<div class="d-line">' + t + '</div>';
+      });
+      el.innerHTML = out;
+    }
+  }
+
+  var recap = document.getElementById('prompt-recap');
+  if (recap) {
+    var text = recap.textContent.trim();
+    var m = text.match(/^\(([^)]+)\)\s*([\s\S]*)/);
+    if (m) {
+      recap.innerHTML = '<span class="recap-pos">' + m[1] + '</span> <span>' + m[2].trim() + '</span>';
+    }
+  }
+})();
+</script>

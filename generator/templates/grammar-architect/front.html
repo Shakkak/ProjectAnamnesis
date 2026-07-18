@@ -1,0 +1,25 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div id="ga-concept-raw" style="display:none">{{Definition}}</div>
+
+<div class="card-front">
+  <div class="ga-badge">C1 · C2 Grammar</div>
+  <div class="ga-question" id="ga-question"></div>
+</div>
+
+<script>
+(function () {
+  var raw = document.getElementById('ga-concept-raw');
+  if (!raw) return;
+  var text = raw.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n').map(function(l){ return l.trim(); }).filter(function(l){ return l; });
+  // lines[0] = structure name (shown on back); lines[1+] = question (shown on front)
+  if (lines.length > 1) document.getElementById('ga-question').textContent = lines.slice(1).join(' ');
+  else if (lines[0]) document.getElementById('ga-question').textContent = lines[0];
+})();
+</script>

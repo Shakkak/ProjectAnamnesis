@@ -1,0 +1,209 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.card, body {
+  background: #0f0f0f;
+  font-family: Inter, system-ui, sans-serif;
+  color: #f0f0f0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Front ────────────────────────────────────────────────────────────────── */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #707070;
+  margin-bottom: 32px;
+}
+
+.prompt {
+  font-family: Vazirmatn, Tahoma, Arial, sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 700;
+  color: #f0f0f0;
+  text-align: center;
+  direction: rtl;
+  line-height: 1.4;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+/* ── IPA hint ─────────────────────────────────────────────────────────────── */
+.ipa-hint {
+  display: none;
+  font-size: 0.92rem;
+  color: #909090;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.hint-btn {
+  background: transparent;
+  border: 1.5px solid #333;
+  border-radius: 20px;
+  color: #707070;
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 4px 14px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s;
+}
+.hint-btn:hover { border-color: #555; color: #b0b0b0; }
+
+/* ── Typing input ─────────────────────────────────────────────────────────── */
+.type-wrap { width: 100%; max-width: 420px; }
+
+#typeans {
+  width: 100%;
+  background: #1a1a1a;
+  border: 2px solid #2a2a2a;
+  border-radius: 10px;
+  color: #f0f0f0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.1rem;
+  outline: none;
+  padding: 12px 16px;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#typeans:focus {
+  border-color: #404040;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+}
+#typeans::placeholder { color: #333; }
+
+/* ── Back ─────────────────────────────────────────────────────────────────── */
+.card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 32px 20px 72px;
+  position: relative;
+}
+
+/* Persian recap (dimmed, smaller) */
+.prompt-recap {
+  font-family: Vazirmatn, Tahoma, Arial, sans-serif;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: #707070;
+  direction: rtl;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.recap-pos {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #606060;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ── Typing diff ──────────────────────────────────────────────────────────── */
+.type-result {
+  width: 100%;
+  max-width: 480px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 0 0 20px;
+  font-size: 0.95rem;
+  text-align: center;
+  font-family: Inter, system-ui, sans-serif;
+}
+.typeGood   { color: #4caf50; }
+.typeBad    { color: #ef5350; text-decoration: line-through; }
+.typeMissed { color: #ef5350; text-decoration: underline; }
+
+/* ── Answer block ─────────────────────────────────────────────────────────── */
+.answer-row {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.answer-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #606060;
+  margin-bottom: 6px;
+}
+
+.english-word {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  color: #f0f0f0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.ipa {
+  font-size: 0.9rem;
+  color: #909090;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+/* ── Details panel ────────────────────────────────────────────────────────── */
+.details {
+  width: 100%;
+  max-width: 620px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: left;
+}
+
+.d-head    { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#707070; text-align:center; margin-top:16px; margin-bottom:8px; padding-top:14px; border-top:1px solid #252525; }
+.d-head:first-child { margin-top:0; border-top:none; padding-top:0; }
+.d-line    { font-size:14px; color:#c8c8c8; line-height:1.8; margin-bottom:3px; }
+.d-example { font-size:14px; color:#b0b0b0; line-height:1.75; padding:5px 12px; border-left:2px solid #2e2e2e; margin-bottom:6px; font-style:italic; }
+.d-synonyms{ font-size:13px; color:#a0a0a0; line-height:1.7; margin-bottom:4px; font-style:italic; }
+.d-gap     { height:4px; }
+.wf-entry  { background:#1e1e1e; border:1px solid #272727; border-radius:6px; padding:10px 13px; margin-bottom:8px; }
+.wf-meta   { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:5px; }
+.wf-word   { font-size:15px; font-weight:700; color:#f0f0f0; }
+.wf-ipa    { font-size:12px; color:#909090; }
+.wf-pos    { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#a0a0a0; background:#2a2a2a; padding:1px 7px; border-radius:3px; }
+.wf-def    { font-size:13px; color:#b0b0b0; line-height:1.7; }
+.wf-example{ font-size:13px; color:#909090; font-style:italic; padding:4px 10px; border-left:2px solid #252525; margin-top:2px; margin-bottom:8px; }
+
+/* ── Watermark ────────────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.watermark:hover { color: #aaa; }

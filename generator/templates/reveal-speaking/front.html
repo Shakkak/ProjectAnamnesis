@@ -1,0 +1,17 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="card-front">
+  <div class="mic-icon">🎙</div>
+  <div class="prompt-label">Speaking Practice</div>
+  <div class="question">{{Definition}}</div>
+  {{#Extra 2}}
+  <div class="hint-area">
+    <span class="hint-text" id="hint-text" style="display:none">{{Extra 2}}</span>
+    <button class="hint-btn" onclick="
+      document.getElementById('hint-text').style.display='inline';
+      this.style.display='none';
+    ">key points</button>
+  </div>
+  {{/Extra 2}}
+</div>

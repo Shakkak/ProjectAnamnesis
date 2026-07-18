@@ -1,0 +1,31 @@
+/* Carbon — dark charcoal, no accent, pure gray (default) */
+:root {
+  --bg:         #0f0f0f;
+  --surface:    #1a1a1a;
+  --surface-2:  #1e1e1e;
+  --surface-3:  #141414;
+  --border:     #2a2a2a;
+  --border-sm:  #222;
+  --text:       #f0f0f0;
+  --muted:      #c8c8c8;
+  --dim:        #909090;
+  --faint:      #707070;
+  --badge-bg:   #2a2a2a;
+  --code-bg:    #111111;
+  --code-text:  #e8ecf4;
+  --code-inline-bg:   #1e1e1e;
+  --code-inline-text: #c8c8c8;
+  --shadow:     0 4px 24px rgba(0,0,0,0.4);
+
+  /* Aliases — resolve legacy variable names used by reveal* and toefl-speaking */
+  --bg-card:    #1a1a1a;
+  --bg-code:    #111111;
+  --text-dim:   #909090;
+  --panel:      #1e1e1e;
+  --bg-steps:   #161616;
+  --accent:     #404040;
+  --accent-lt:  #252525;
+  --accent-md:  #c8c8c8;
+  --accent-dim: #333333;
+  --accent-dk:  #555555;
+}

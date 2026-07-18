@@ -1,0 +1,16 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="card-front">
+  <div class="topic-badge">Statistics 110</div>
+  <div class="question">{{Definition}}</div>
+  {{#Extra 2}}
+  <div class="hint-row">
+    <span class="hint-text" id="hint-text" style="display:none">{{Extra 2}}</span>
+    <button class="hint-btn" onclick="
+      document.getElementById('hint-text').style.display='inline';
+      this.style.display='none';
+    ">Show hint</button>
+  </div>
+  {{/Extra 2}}
+</div>

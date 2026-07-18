@@ -1,0 +1,30 @@
+/* Void — pure minimal black, no borders, maximum contrast */
+:root {
+  --bg:         #000000;
+  --surface:    #050505;
+  --surface-2:  #0a0a0a;
+  --surface-3:  #030303;
+  --border:     #1a1a1a;
+  --border-sm:  #141414;
+  --text:       #e8e8e8;
+  --muted:      #c0c0c0;
+  --dim:        #606060;
+  --faint:      #383838;
+  --badge-bg:   #111111;
+  --code-bg:    #080808;
+  --code-text:  #e8e8e8;
+  --code-inline-bg:   #0e0e0e;
+  --code-inline-text: #c0c0c0;
+  --shadow:     none;
+
+  --bg-card:    #050505;
+  --bg-code:    #080808;
+  --text-dim:   #606060;
+  --panel:      #0a0a0a;
+  --bg-steps:   #030303;
+  --accent:     #1a1a1a;
+  --accent-lt:  #0f0f0f;
+  --accent-md:  #c0c0c0;
+  --accent-dim: #151515;
+  --accent-dk:  #252525;
+}

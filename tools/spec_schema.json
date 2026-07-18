@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Custom Deck Spec",
+  "description": "Filter spec for make_deck.py. All fields are optional — omit to include all values.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Free-text description of the target learner or goal (not used for filtering)."
+    },
+    "role": {
+      "type": "array",
+      "description": "Include cards tagged with at least one of these role: values (without prefix). Omit to include all roles.",
+      "items": {
+        "type": "string",
+        "enum": ["mle", "ds", "cv-engineer", "nlp-engineer", "research", "eo-specialist"]
+      },
+      "minItems": 1
+    },
+    "domain": {
+      "type": "object",
+      "description": "Fine-grained domain filtering.",
+      "additionalProperties": false,
+      "properties": {
+        "must": {
+          "type": "array",
+          "description": "Card must match at least one of these domain: values (without prefix).",
+          "items": { "type": "string", "enum": ["ml-core","deep-learning","computer-vision","transformers-nlp","self-supervised","generative-models","statistics","math","earth-observation","biodiversity-ml","vision-language","production-ml"] }
+        },
+        "include": {
+          "type": "array",
+          "description": "After must-filtering, prefer cards from these domains to fill up to max_cards.",
+          "items": { "type": "string", "enum": ["ml-core","deep-learning","computer-vision","transformers-nlp","self-supervised","generative-models","statistics","math","earth-observation","biodiversity-ml","vision-language","production-ml"] }
+        },
+        "exclude": {
+          "type": "array",
+          "description": "Never include cards from these domains.",
+          "items": { "type": "string", "enum": ["ml-core","deep-learning","computer-vision","transformers-nlp","self-supervised","generative-models","statistics","math","earth-observation","biodiversity-ml","vision-language","production-ml"] }
+        }
+      }
+    },
+    "level": {
+      "type": "array",
+      "description": "Include only cards at these difficulty levels. Omit to include all.",
+      "items": {
+        "type": "string",
+        "enum": ["fundamental", "intermediate", "advanced"]
+      },
+      "minItems": 1
+    },
+    "style": {
+      "type": "array",
+      "description": "Include only cards of these question styles (without prefix). Omit to include all.",
+      "items": {
+        "type": "string",
+        "enum": ["conceptual", "derivation", "problem-solving", "practical", "tradeoffs", "debugging"]
+      },
+      "minItems": 1
+    },
+    "max_cards": {
+      "type": "integer",
+      "description": "Hard cap on total cards in the output deck. Default: 200.",
+      "minimum": 1,
+      "maximum": 608,
+      "default": 200
+    }
+  }
+}

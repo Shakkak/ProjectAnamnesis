@@ -1,0 +1,28 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="card-front">
+  <div class="label">Question</div>
+  <div class="question">{{Definition}}</div>
+  {{#Extra 2}}
+  <div class="hint">
+    <span class="hint-icon">💡</span>
+    <span class="hint-text" id="hint-text" style="display:none">{{Extra 2}}</span>
+    <button class="hint-btn" id="hint-btn" onclick="
+      document.getElementById('hint-text').style.display='inline';
+      this.style.display='none';
+    ">hint</button>
+  </div>
+  {{/Extra 2}}
+</div>
+
+<script>
+(function(){
+  document.addEventListener("keydown", function(e){
+    if((e.key==="Enter"||e.key===" ") && !e.repeat){
+      var btn = document.querySelector(".flip-btn");
+      if(btn) btn.click();
+    }
+  });
+})();
+</script>

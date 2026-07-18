@@ -1,0 +1,46 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-back">
+  <div class="fill-badge">Answer</div>
+  <div class="passage-block">
+    <div class="passage">{{cloze:Text}}</div>
+  </div>
+  {{#Extra}}
+  <div class="section-label">Notes</div>
+  <div class="notes-block" id="notes-back">{{Extra}}</div>
+  {{/Extra}}
+</div>
+
+<script>
+(function () {
+  var el = document.getElementById('notes-back');
+  if (!el) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) return;
+  var text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n');
+  var out = '';
+  lines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) return;
+    if (t.charAt(0) === '•') {
+      t = t.slice(1).trim();
+    }
+    var colon = t.indexOf(':');
+    if (colon !== -1) {
+      var word = t.slice(0, colon).trim();
+      var def = t.slice(colon + 1).trim();
+      out += '<div class="note-entry"><span class="note-word">' + word + '</span><span class="note-sep">—</span><span class="note-def">' + def + '</span></div>';
+    } else {
+      out += '<div class="note-entry"><span class="note-def">' + t + '</span></div>';
+    }
+  });
+  el.innerHTML = out;
+})();
+</script>
+
+<a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">Made with ProjectAnamnesis</a>

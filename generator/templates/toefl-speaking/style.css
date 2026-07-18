@@ -1,0 +1,286 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0f0f0f;
+  --surface:   #1a1a1a;
+  --border:    #2a2a2a;
+  --border-sm: #222;
+  --text:      #f0f0f0;
+  --muted:     #c8c8c8;
+  --dim:       #909090;
+  --panel:     #1e1e1e;
+  --badge-bg:  #2a2a2a;
+  --accent:    #0d9488;
+  --accent-dim:#0a7068;
+  --shadow:    0 4px 24px rgba(0,0,0,0.4);
+}
+
+.card, body {
+  background: var(--bg);
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ── Shared top bar ───────────────────────────────────────────────────────── */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.topic-chip {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(13,148,136,.12);
+  border: 1px solid rgba(13,148,136,.25);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+.qnum-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--badge-bg);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+/* ── Front ────────────────────────────────────────────────────────────────── */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px 28px 80px;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.question-text {
+  font-size: clamp(1.15rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+/* Intro cards: scenario text in a rounded panel */
+.card-front.is-intro .question-text {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* Question cards: teal left accent */
+.card-front.is-question .question-text {
+  border-left: 3px solid var(--accent);
+  padding-left: 18px;
+}
+
+.speak-hint {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+  margin-top: auto;
+}
+
+/* ── Back ─────────────────────────────────────────────────────────────────── */
+.card-back {
+  padding: 28px 28px 72px;
+  max-width: 700px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+.question-recap {
+  font-size: 0.82rem;
+  color: var(--dim);
+  border-bottom: 1px solid var(--border-sm);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ── Section blocks ───────────────────────────────────────────────────────── */
+.section-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-sm);
+}
+
+/* ── Ideas ────────────────────────────────────────────────────────────────── */
+.idea-entry {
+  margin-bottom: 8px;
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.idea-title {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.idea-sep {
+  color: var(--dim);
+}
+
+.idea-desc {
+  color: var(--muted);
+}
+
+.idea-plain {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.i-gap { height: 6px; }
+
+/* ── Vocabulary ───────────────────────────────────────────────────────────── */
+.v-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 12px 0 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-sm);
+}
+
+.v-head:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+.v-entry {
+  background: var(--panel);
+  border: 1px solid var(--border-sm);
+  border-radius: 7px;
+  padding: 8px 11px;
+  margin-bottom: 6px;
+}
+
+.v-word {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.v-meaning {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.v-example {
+  font-size: 12px;
+  color: var(--dim);
+  font-style: italic;
+  margin-top: 3px;
+  padding-left: 4px;
+  border-left: 2px solid var(--border);
+}
+
+.v-plain {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 3px;
+}
+
+/* ── Figures of Speech ────────────────────────────────────────────────────── */
+.f-entry {
+  background: var(--panel);
+  border: 1px solid var(--border-sm);
+  border-radius: 7px;
+  padding: 8px 11px;
+  margin-bottom: 7px;
+}
+
+.f-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  background: rgba(13,148,136,.1);
+  border-radius: 3px;
+  padding: 1px 6px;
+  margin-right: 4px;
+}
+
+.f-phrase {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.f-meaning {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+.f-example {
+  font-size: 12px;
+  color: var(--dim);
+  font-style: italic;
+  margin-top: 3px;
+  padding-left: 4px;
+  border-left: 2px solid var(--border);
+}
+
+.f-plain {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 3px;
+}
+
+/* ── Watermark ────────────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  letter-spacing: .03em;
+  transition: color 0.2s;
+}
+.watermark:hover { color: #aaa; }

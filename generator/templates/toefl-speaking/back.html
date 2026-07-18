@@ -1,0 +1,142 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-back" id="card-back">
+  <div class="top-bar">
+    <span class="topic-chip">{{Extra 3}}</span>
+    <span class="qnum-badge">{{Extra 4}}</span>
+  </div>
+
+  <div class="question-recap">{{Definition}}</div>
+
+  <div class="section-block">
+    <div class="section-label" id="ideas-label">IDEAS</div>
+    <div class="ideas-body" id="ideas-block">{{Learnable}}</div>
+  </div>
+
+  {{#Extra}}
+  <div class="section-block">
+    <div class="section-label">VOCABULARY</div>
+    <div class="vocab-body" id="vocab-block">{{Extra}}</div>
+  </div>
+  {{/Extra}}
+
+  {{#Extra 2}}
+  <div class="section-block">
+    <div class="section-label">FIGURES OF SPEECH</div>
+    <div class="figures-body" id="figures-block">{{Extra 2}}</div>
+  </div>
+  {{/Extra 2}}
+
+  <a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">Made with ProjectAnamnesis</a>
+</div>
+
+<script>
+/* ── Ideas parser ──────────────────────────────────────────────────────── */
+(function () {
+  var el = document.getElementById('ideas-block');
+  if (!el) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) return;
+  var text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n');
+  var out = '';
+  var qnum = "{{Extra 4}}".trim();
+  var isIntro = (qnum === 'INTRO');
+  if (isIntro) {
+    document.getElementById('ideas-label').textContent = 'TOPIC OVERVIEW';
+  }
+  lines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) { out += '<div class="i-gap"></div>'; return; }
+    var idx = t.indexOf(' — ');
+    if (idx > -1) {
+      var title = t.substring(0, idx).trim();
+      var desc  = t.substring(idx + 3).trim();
+      out += '<div class="idea-entry"><span class="idea-title">' + title + '</span><span class="idea-sep"> — </span><span class="idea-desc">' + desc + '</span></div>';
+    } else {
+      out += '<div class="idea-plain">' + t + '</div>';
+    }
+  });
+  el.innerHTML = out;
+})();
+
+/* ── Vocabulary parser ─────────────────────────────────────────────────── */
+(function () {
+  var el = document.getElementById('vocab-block');
+  if (!el) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) return;
+  var text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n');
+  var out = '';
+  var HEADERS = ['common', 'intermediate', 'advanced'];
+  lines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) return;
+    if (HEADERS.indexOf(t.toLowerCase()) > -1) {
+      out += '<div class="v-head">' + t + '</div>';
+      return;
+    }
+    var idx = t.indexOf(' — ');
+    if (idx > -1) {
+      var word = t.substring(0, idx).trim();
+      var rest = t.substring(idx + 3).trim();
+      var exIdx = rest.indexOf('Example: ');
+      var meaning = exIdx > -1 ? rest.substring(0, exIdx).trim() : rest;
+      var example = exIdx > -1 ? rest.substring(exIdx + 9).trim() : '';
+      if (meaning.slice(-1) === '.') meaning = meaning.slice(0, -1);
+      out += '<div class="v-entry"><span class="v-word">' + word + '</span>'
+           + '<span class="v-meaning"> — ' + meaning + '</span>'
+           + (example ? '<div class="v-example">“' + example + '”</div>' : '')
+           + '</div>';
+    } else {
+      out += '<div class="v-plain">' + t + '</div>';
+    }
+  });
+  el.innerHTML = out;
+})();
+
+/* ── Figures parser ────────────────────────────────────────────────────── */
+(function () {
+  var el = document.getElementById('figures-block');
+  if (!el) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) return;
+  var text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n');
+  var out = '';
+  var FTYPES = ['idiom','proverb','adage','maxim','aphorism','cliché','cliche'];
+  lines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) return;
+    var colonIdx = t.indexOf(': ');
+    var ftype = colonIdx > -1 ? t.substring(0, colonIdx).toLowerCase() : '';
+    if (FTYPES.indexOf(ftype) > -1) {
+      var rest = t.substring(colonIdx + 2).trim();
+      var dashIdx = rest.indexOf(' — ');
+      var phrase  = dashIdx > -1 ? rest.substring(0, dashIdx).trim() : rest;
+      var meaning = dashIdx > -1 ? rest.substring(dashIdx + 3).trim() : '';
+      var exIdx   = meaning.indexOf('Example: ');
+      var exText  = exIdx > -1 ? meaning.substring(exIdx + 9).trim() : '';
+      if (exIdx > -1) meaning = meaning.substring(0, exIdx).trim();
+      if (meaning.slice(-1) === '.') meaning = meaning.slice(0, -1);
+      out += '<div class="f-entry">'
+           + '<span class="f-type">' + t.substring(0, colonIdx) + '</span>'
+           + '<span class="f-phrase"> “' + phrase + '”</span>'
+           + (meaning ? '<div class="f-meaning">' + meaning + '</div>' : '')
+           + (exText  ? '<div class="f-example">“' + exText + '”</div>' : '')
+           + '</div>';
+    } else {
+      out += '<div class="f-plain">' + t + '</div>';
+    }
+  });
+  el.innerHTML = out;
+})();
+</script>

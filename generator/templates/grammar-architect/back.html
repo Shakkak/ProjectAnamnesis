@@ -1,0 +1,76 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-back">
+
+  <div class="ga-answer-name" id="ga-answer-name">{{Definition}}</div>
+
+  <div class="ga-label ga-label-first">The Formula</div>
+  <div class="ga-formula">{{Learnable}}</div>
+
+  {{#Extra}}
+  <div class="ga-label">Example</div>
+  <div class="ga-example">{{Extra}}</div>
+  {{/Extra}}
+
+  {{#Extra 2}}
+  <div class="bd-block" id="bd-block">{{Extra 2}}</div>
+  {{/Extra 2}}
+
+</div>
+
+<script>
+(function () {
+  function esc(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function toText(innerHTML) {
+    return innerHTML
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  }
+
+  // Show only the structure name (first line) as the answer header
+  var nameEl = document.getElementById('ga-answer-name');
+  if (nameEl && !/<(div|h[1-6]|p|ul|ol|section)/i.test(nameEl.innerHTML)) {
+    var lines = toText(nameEl.innerHTML).split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
+    nameEl.textContent = lines[0] || '';
+  }
+
+  // Parse breakdown field
+  var bdEl = document.getElementById('bd-block');
+  if (!bdEl) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(bdEl.innerHTML)) return;
+
+  var bdLines = toText(bdEl.innerHTML).split('\n');
+  var out = '';
+  var headCount = 0;
+
+  bdLines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) return;
+
+    // Section header: all-uppercase line
+    if (/^[A-Z][A-Z\s\-&]+$/.test(t) && t.length > 2) {
+      var cls = 'bd-head' + (headCount === 0 ? ' bd-head-first' : '');
+      out += '<div class="' + cls + '">' + esc(t) + '</div>';
+      headCount++;
+      return;
+    }
+
+    // Variation line (→ prefix)
+    if (t.charAt(0) === '→') {
+      out += '<div class="bd-var">' + esc(t.slice(1).trim()) + '</div>';
+      return;
+    }
+
+    out += '<div class="bd-line">' + esc(t) + '</div>';
+  });
+
+  bdEl.innerHTML = out;
+})();
+</script>
+
+<a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">Made with ProjectAnamnesis</a>

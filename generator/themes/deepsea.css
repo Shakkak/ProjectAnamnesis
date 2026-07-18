@@ -1,0 +1,30 @@
+/* Deepsea — dark ocean blue depth */
+:root {
+  --bg:         #00060f;
+  --surface:    #000d1a;
+  --surface-2:  #001226;
+  --surface-3:  #000810;
+  --border:     #001830;
+  --border-sm:  #001020;
+  --text:       #e0f2fe;
+  --muted:      #bae6fd;
+  --dim:        #7894a8;
+  --faint:      #2a4a5a;
+  --badge-bg:   #00213f;
+  --code-bg:    #000508;
+  --code-text:  #e0f2fe;
+  --code-inline-bg:   #001220;
+  --code-inline-text: #7dd3fc;
+  --shadow:     0 0 50px rgba(3,105,161,0.15);
+
+  --bg-card:    #000d1a;
+  --bg-code:    #000508;
+  --text-dim:   #7894a8;
+  --panel:      #001226;
+  --bg-steps:   #000c18;
+  --accent:     #075985;
+  --accent-lt:  #00213f;
+  --accent-md:  #7dd3fc;
+  --accent-dim: #0c4a6e;
+  --accent-dk:  #0369a1;
+}

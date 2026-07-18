@@ -1,0 +1,134 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.card, body {
+  background: #0f0f0f;
+  font-family: Inter, system-ui, sans-serif;
+  color: #f0f0f0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Front ────────────────────────────────────────────────────────────────── */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #707070;
+  margin-bottom: 40px;
+}
+
+/* ── Audio button (both sides) ────────────────────────────────────────────── */
+.audio-area,
+.audio-replay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+/* Anki renders [sound:…] as an <a> or <button> with class replay-button */
+.audio-area .replay-button,
+.audio-replay .replay-button {
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5);
+  transition: background 0.15s, transform 0.1s;
+  text-decoration: none;
+}
+
+.audio-area .replay-button:hover,
+.audio-replay .replay-button:hover {
+  background: #e8e8e8;
+  transform: scale(1.05);
+}
+
+.audio-area .replay-button:active,
+.audio-replay .replay-button:active {
+  transform: scale(0.97);
+}
+
+/* Anki injects an SVG inside the button — make it dark so it's visible on white */
+.audio-area .replay-button svg,
+.audio-replay .replay-button svg {
+  width: 38px;
+  height: 38px;
+  fill: #1a1a1a;
+  stroke: #1a1a1a;
+}
+
+/* Some Anki versions use a text/Unicode play glyph */
+.audio-area .replay-button::before,
+.audio-replay .replay-button::before {
+  content: '▶';
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-left: 4px; /* optical center for the play triangle */
+}
+
+/* Hide the ::before if an SVG child is already present */
+.audio-area .replay-button:has(svg)::before,
+.audio-replay .replay-button:has(svg)::before {
+  display: none;
+}
+
+.instruction {
+  font-size: 0.8rem;
+  color: #909090;
+  max-width: 300px;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* ── Back ─────────────────────────────────────────────────────────────────── */
+.card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 32px 80px;
+  text-align: center;
+  position: relative;
+}
+
+.sentence {
+  font-size: clamp(1.15rem, 3.5vw, 1.65rem);
+  font-weight: 500;
+  color: #f0f0f0;
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ── Watermark ────────────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.watermark:hover { color: #aaa; }

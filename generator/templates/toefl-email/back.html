@@ -1,0 +1,143 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-back">
+
+  <!-- Metadata chips (populated by JS) -->
+  <div class="meta-row" id="meta-row"></div>
+
+  <!-- Task recap (scenario only, no metadata lines) -->
+  <div class="task-recap" id="task-recap">{{Definition}}</div>
+
+  <!-- Sample email -->
+  <div class="section-header">Sample Email</div>
+  <div class="email-block">
+    <div class="email-body">{{Learnable}}</div>
+  </div>
+
+  {{#Extra}}
+  <!-- Breakdown -->
+  <div class="section-header">Writing Tips</div>
+  <div class="breakdown-block" id="breakdown-block">{{Extra}}</div>
+  {{/Extra}}
+
+  {{#Extra 2}}
+  <div class="extra-block">{{Extra 2}}</div>
+  {{/Extra 2}}
+
+</div>
+
+<script>
+(function () {
+  // ── Parse question field into metadata + task text ──────────────────────
+  var recapEl = document.getElementById('task-recap');
+  var metaEl  = document.getElementById('meta-row');
+  if (recapEl) {
+    if (!/<(div|h[1-6]|p|ul|ol|section)/i.test(recapEl.innerHTML)) {
+      var raw = recapEl.innerHTML
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      var lines = raw.split('\n');
+      var meta = [];
+      var taskStart = 0;
+      for (var i = 0; i < lines.length; i++) {
+        var t = lines[i].trim();
+        if (!t && i > 0) { taskStart = i + 1; break; }
+        if (t && /^[A-Za-z ]+:/.test(t)) {
+          var colon = t.indexOf(':');
+          meta.push({ key: t.slice(0, colon).trim(), val: t.slice(colon + 1).trim() });
+        } else if (t) { taskStart = 0; break; }
+      }
+      recapEl.textContent = lines.slice(taskStart).join('\n').trim();
+
+      if (metaEl && meta.length) {
+        var chips = '';
+        meta.forEach(function (m) {
+          chips += '<div class="meta-chip">'
+            + '<span class="chip-label">' + m.key + '</span>'
+            + '<span class="chip-value">' + m.val + '</span>'
+            + '</div>';
+        });
+        metaEl.innerHTML = chips;
+      }
+    }
+  }
+
+  // ── Parse breakdown field ────────────────────────────────────────────────
+  var bdEl = document.getElementById('breakdown-block');
+  if (!bdEl) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(bdEl.innerHTML)) return;
+  var text = bdEl.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var bdLines = text.split('\n');
+  var out = '';
+  var vocabBuf = null;
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function flushVocab() {
+    if (!vocabBuf) return;
+    out += '<div class="vocab-entry">' + vocabBuf + '</div>';
+    vocabBuf = null;
+  }
+
+  bdLines.forEach(function (line) {
+    var t = line.trim();
+    if (!t) { flushVocab(); return; }
+
+    // Section header: all-uppercase line (letters, spaces, parens, /)
+    if (/^[A-Z][A-Z\s\-()/]+$/.test(t) && t.length > 3) {
+      flushVocab();
+      out += '<div class="bd-section">' + esc(t) + '</div>';
+      return;
+    }
+    // ▸ key sentence
+    if (t.charAt(0) === '▸') {
+      flushVocab();
+      out += '<div class="bd-keysent">' + esc(t.slice(1).trim()) + '</div>';
+      return;
+    }
+    // → alternative phrase
+    if (t.charAt(0) === '→') {
+      flushVocab();
+      out += '<div class="bd-alt">' + esc(t.slice(1).trim()) + '</div>';
+      return;
+    }
+    // • vocabulary entry
+    if (t.charAt(0) === '•') {
+      flushVocab();
+      var entry = t.slice(1).trim();
+      var dashIdx = entry.indexOf(' — ');
+      var wordPart = dashIdx !== -1 ? entry.slice(0, dashIdx) : entry;
+      var def = dashIdx !== -1 ? esc(entry.slice(dashIdx + 3)) : '';
+      var posMatch = wordPart.match(/^(.+?)\s+\(([^)]+)\)$/);
+      var word = esc(posMatch ? posMatch[1] : wordPart);
+      var pos = posMatch ? esc(posMatch[2]) : '';
+      vocabBuf = '<div class="vocab-meta">'
+        + '<span class="vocab-word">' + word + '</span>'
+        + (pos ? '<span class="vocab-pos">' + pos + '</span>' : '')
+        + '</div>'
+        + (def ? '<div class="vocab-def">' + def + '</div>' : '');
+      return;
+    }
+    // e.g. continuation — attach to open vocab entry
+    if (/^e\.g\./i.test(t) && vocabBuf !== null) {
+      vocabBuf += '<div class="vocab-eg">' + esc(t) + '</div>';
+      return;
+    }
+    // plain text (tone note, etc.)
+    flushVocab();
+    out += '<div class="bd-text">' + esc(t) + '</div>';
+  });
+  flushVocab();
+  bdEl.innerHTML = out;
+})();
+</script>
+
+<a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">Made with ProjectAnamnesis</a>

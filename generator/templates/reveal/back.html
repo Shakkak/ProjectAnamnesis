@@ -1,0 +1,38 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="card-back">
+  <div class="question-recap">{{Definition}}</div>
+
+  <div class="answer-block">
+    <div class="answer-label">Answer</div>
+    <div class="answer">{{Learnable}}</div>
+  </div>
+
+  {{#Extra}}
+  <div class="steps">{{Extra}}</div>
+  {{/Extra}}
+
+  {{#Extra 2}}
+  <div class="hint-block">{{Extra 2}}</div>
+  {{/Extra 2}}
+
+  {{#Extra 3}}
+  <div class="extra-block">{{Extra 3}}</div>
+  {{/Extra 3}}
+
+  <a href="https://github.com/Shakkak/ProjectAnamnesis" class="watermark" target="_blank">made with ProjectAnamnesis</a>
+</div>
+
+<script>
+(function(){
+  document.addEventListener("keydown", function(e){
+    if(e.repeat) return;
+    var map = {"1":"ease1","2":"ease2","3":"ease3","4":"ease4"};
+    var ease = map[e.key];
+    if(!ease) return;
+    var btn = document.querySelector(".ease-button[data-ease='"+ease+"'], #"+ease);
+    if(btn) btn.click();
+  });
+})();
+</script>

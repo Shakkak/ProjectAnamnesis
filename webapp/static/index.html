@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anamnesis — Card Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-left">
+    <span class="logo">Anamnesis</span>
+    <a href="/graph" class="nav-link">Graph</a>
+    <select id="deck-select"><option value="">— select deck —</option></select>
+  </div>
+  <div class="header-right">
+    <div id="session-stats">
+      <span class="sstat sstat-a">✓ <b id="sess-a">0</b></span>
+      <span class="sstat sstat-r">✗ <b id="sess-r">0</b></span>
+      <span class="sstat sstat-s">→ <b id="sess-s">0</b></span>
+    </div>
+    <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+    <span id="progress-label">—</span>
+    <button id="shuffle-btn" class="icon-btn" title="Shuffle (Shift+S)">⇄</button>
+    <div id="anki-status" class="anki-dot anki-unknown" title="AnkiConnect status"></div>
+    <button id="push-btn" class="btn btn-anki" disabled>Push to Anki</button>
+  </div>
+</header>
+
+<!-- Filter bar -->
+<div id="filter-bar">
+  <div class="filter-row">
+    <span class="filter-label">STATUS</span>
+    <div class="pill-group" id="status-pills">
+      <button class="pill pill-status active" data-value="pending">Pending</button>
+      <button class="pill pill-status" data-value="all">All</button>
+      <button class="pill pill-status" data-value="accepted">Accepted</button>
+      <button class="pill pill-status" data-value="rejected">Rejected</button>
+    </div>
+    <span class="filter-sep">·</span>
+    <span class="filter-label">LEVEL</span>
+    <div class="pill-group" id="level-pills">
+      <button class="pill pill-level" data-value="junior">Junior</button>
+      <button class="pill pill-level" data-value="mid-level">Mid</button>
+      <button class="pill pill-level" data-value="senior">Senior</button>
+    </div>
+  </div>
+  <div class="filter-row filter-row-tags">
+    <span class="filter-label">TAGS</span>
+    <div id="tag-pills" class="tag-pills-scroll"></div>
+    <button id="clear-tags-btn" class="pill pill-clear" style="display:none">× Clear</button>
+  </div>
+</div>
+
+<!-- Main layout -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div id="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search-input" type="text" placeholder="Search cards… ( / )" autocomplete="off" spellcheck="false">
+    </div>
+    <div id="card-list"></div>
+  </aside>
+
+  <!-- Review area -->
+  <main id="review-area">
+    <div id="empty-state">Select a deck to begin.</div>
+
+    <div id="card-view" style="display:none">
+      <div class="card-meta">
+        <span id="card-section" class="badge badge-section"></span>
+        <span id="card-type" class="badge badge-type"></span>
+        <span id="card-status" class="badge"></span>
+        <div id="card-tags"></div>
+      </div>
+
+      <div class="preview-wrap">
+        <div class="preview-tabs">
+          <button class="tab-btn active" id="tab-front" onclick="showTab('front')">Front</button>
+          <button class="tab-btn" id="tab-back" onclick="showTab('back')">Back</button>
+        </div>
+        <div class="iframe-wrap">
+          <iframe id="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+          <div id="preview-loader" class="loader">Loading…</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-accept" id="btn-accept" onclick="review('accepted')">✓ Accept</button>
+        <button class="btn btn-reject" id="btn-reject" onclick="startReject()">✗ Reject</button>
+        <button class="btn btn-skip"   id="btn-skip"   onclick="review('skipped')">→ Skip</button>
+      </div>
+
+      <div id="reject-panel" style="display:none">
+        <textarea id="reject-comment" placeholder="What's wrong? (optional — fed back to the agent)"></textarea>
+        <div class="reject-actions">
+          <button class="btn btn-reject" onclick="confirmReject()">Confirm Reject</button>
+          <button class="btn btn-skip"   onclick="cancelReject()">Cancel</button>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-nav" onclick="navigate(-1)">← Prev</button>
+        <button class="btn btn-nav" onclick="navigate(1)">Next →</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Shortcut overlay -->
+<div id="shortcut-overlay">
+  <div id="shortcut-panel">
+    <div class="sc-header">Keyboard Shortcuts</div>
+    <div class="sc-groups">
+      <div class="sc-group">
+        <div class="sc-title">NAVIGATION</div>
+        <div class="sc-row"><div class="sc-keys"><kbd>←</kbd> <kbd>h</kbd></div><span>Previous</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>→</kbd> <kbd>l</kbd></div><span>Next</span></div>
+      </div>
+      <div class="sc-group">
+        <div class="sc-title">REVIEW</div>
+        <div class="sc-row"><div class="sc-keys"><kbd>a</kbd></div><span>Accept</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>r</kbd></div><span>Reject</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>s</kbd></div><span>Skip</span></div>
+      </div>
+      <div class="sc-group">
+        <div class="sc-title">VIEW</div>
+        <div class="sc-row"><div class="sc-keys"><kbd>f</kbd> <kbd>Space</kbd></div><span>Flip card</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>/</kbd></div><span>Search</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>S</kbd></div><span>Shuffle</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>?</kbd></div><span>Help</span></div>
+      </div>
+    </div>
+    <div class="sc-footer">Press <kbd>Esc</kbd> or <kbd>?</kbd> to close</div>
+  </div>
+</div>
+
+<!-- Vault peek popover -->
+<div id="vault-popover">
+  <div class="vp-title"></div>
+  <div class="vp-excerpt"></div>
+  <a class="vp-link" href="#" target="_blank">Open in vault ↗</a>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

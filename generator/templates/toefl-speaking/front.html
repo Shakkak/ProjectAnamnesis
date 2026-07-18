@@ -1,0 +1,25 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+<div class="card-front" id="card-front">
+  <div class="top-bar">
+    <span class="topic-chip" id="topic-chip">{{Extra 3}}</span>
+    <span class="qnum-badge" id="qnum-badge">{{Extra 4}}</span>
+  </div>
+
+  <div class="question-text" id="question-text">{{Definition}}</div>
+
+  <div class="speak-hint">Speak your answer, then flip to see ideas</div>
+</div>
+
+<script>
+(function () {
+  var qnum = "{{Extra 4}}".trim();
+  var front = document.getElementById('card-front');
+  if (qnum === 'INTRO') {
+    front.classList.add('is-intro');
+  } else {
+    front.classList.add('is-question');
+  }
+})();
+</script>

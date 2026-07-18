@@ -1,0 +1,39 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
+
+<div class="card-front">
+  <div class="task-badge">Email Writing Task</div>
+  <div class="task" id="task-text">{{Definition}}</div>
+  {{#Extra 2}}
+  <div class="hint-row">
+    <span class="hint-text" id="hint-text" style="display:none">{{Extra 2}}</span>
+    <button class="hint-btn" onclick="
+      document.getElementById('hint-text').style.display='inline';
+      this.style.display='none';
+    ">hint</button>
+  </div>
+  {{/Extra 2}}
+</div>
+
+<script>
+(function () {
+  var el = document.getElementById('task-text');
+  if (!el) return;
+  if (/<(div|h[1-6]|p|ul|ol|section)/i.test(el.innerHTML)) return;
+  var text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var lines = text.split('\n');
+  // Skip leading metadata lines (Key: Value) and the blank line after them
+  var taskStart = 0;
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    if (!t && i > 0) { taskStart = i + 1; break; }
+    // If line doesn't look like metadata, treat everything as task
+    if (t && !/^[A-Za-z ]+:/.test(t)) { taskStart = 0; break; }
+  }
+  el.textContent = lines.slice(taskStart).join('\n').trim();
+})();
+</script>

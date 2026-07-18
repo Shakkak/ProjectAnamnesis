@@ -1,0 +1,16 @@
+{
+  "deck_name": "Example Deck",
+  "output": "../../output/example_deck.apkg",
+  "sub_decks": true,
+
+  "types": [
+    {
+      "id": "qa",
+      "definition": "../../card_types/typing_qa.json"
+    },
+    {
+      "id": "mc",
+      "definition": "../../card_types/multiple_choice.json"
+    },
+  ]
+}

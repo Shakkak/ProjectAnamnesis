@@ -1,0 +1,192 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:   #00897B;
+  --accent-lt:#E0F2F1;
+  --text:     #1a1a1a;
+  --text-dim: #666;
+  --border:   #e0e0e0;
+  --bg:       #ffffff;
+  --bg-card:  #f9fafb;
+  --correct:  #2e7d32;
+  --wrong:    #c62828;
+  --close:    #f57c00;
+}
+
+.card, body {
+  background: var(--bg);
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Front ────────────────────────────────────────────────────────────────── */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px 24px 80px;
+  position: relative;
+}
+
+.prompt {
+  font-family: Vazirmatn, Tahoma, Arial, sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  direction: rtl;
+  line-height: 1.4;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+/* ── IPA hint ─────────────────────────────────────────────────────────────── */
+.ipa-hint {
+  display: none;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.ipa-hint.visible { display: block; }
+
+.hint-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s;
+}
+.hint-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Typing input ─────────────────────────────────────────────────────────── */
+.type-wrap { width: 100%; max-width: 420px; }
+
+#typeans {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.15rem;
+  outline: none;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#typeans:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-lt);
+}
+#typeans::placeholder { color: #bbb; }
+
+/* ── Back ─────────────────────────────────────────────────────────────────── */
+.card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 28px 20px 64px;
+  position: relative;
+}
+
+.card-back .prompt {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+/* ── Typing diff (Anki native type:Field result) ──────────────────────────── */
+#typeans, .typeGood, .typeBad, .typeMissed {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1rem;
+}
+.typeGood  { color: var(--correct); }
+.typeBad   { color: var(--wrong); text-decoration: line-through; }
+.typeMissed{ color: var(--wrong); text-decoration: underline; }
+
+.type-result {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  padding: 10px 16px;
+  margin: 8px 0 20px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ── Answer block ─────────────────────────────────────────────────────────── */
+.answer-block {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.english-word {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+/* Anki audio button - keep it inline and clean */
+.english-word .anki-sound,
+.english-word button.replay-button,
+.english-word a.replay-button {
+  vertical-align: middle;
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+.ipa {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+/* ── Dictionary details ───────────────────────────────────────────────────── */
+.details {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--text);
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+/* ── Watermark ────────────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-family: Inter, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.watermark:hover { color: #999; }

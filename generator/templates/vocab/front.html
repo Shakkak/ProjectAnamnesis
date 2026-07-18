@@ -1,0 +1,16 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;700&display=swap">
+
+<div class="card-front">
+  <div class="prompt" dir="rtl">{{Definition}}</div>
+
+  {{#Extra 2}}
+  <div class="ipa-hint" id="ipa-hint">{{Extra 2}}</div>
+  <button class="hint-btn" id="hint-btn" onclick="
+    document.getElementById('ipa-hint').classList.add('visible');
+    this.style.display='none';
+  ">IPA</button>
+  {{/Extra 2}}
+
+  <div class="type-wrap">{{type:Learnable}}</div>
+</div>

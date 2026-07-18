@@ -1,0 +1,30 @@
+/* Midnight — deep purple-black, violet tint (from vocab-midnight) */
+:root {
+  --bg:         #0f0a1e;
+  --surface:    #1a1033;
+  --surface-2:  #1e1540;
+  --surface-3:  #0c0818;
+  --border:     #3a2060;
+  --border-sm:  #2d1b55;
+  --text:       #e2d9f3;
+  --muted:      #c4b5fd;
+  --dim:        #9070c0;
+  --faint:      #605080;
+  --badge-bg:   #2d1b69;
+  --code-bg:    #080514;
+  --code-text:  #e2d9f3;
+  --code-inline-bg:   #1a1033;
+  --code-inline-text: #c4b5fd;
+  --shadow:     0 4px 28px rgba(100,50,200,0.22);
+
+  --bg-card:    #1a1033;
+  --bg-code:    #080514;
+  --text-dim:   #9070c0;
+  --panel:      #1e1540;
+  --bg-steps:   #0c0818;
+  --accent:     #4c2f8a;
+  --accent-lt:  #2d1b69;
+  --accent-md:  #c4b5fd;
+  --accent-dim: #6d28d9;
+  --accent-dk:  #7c3aed;
+}

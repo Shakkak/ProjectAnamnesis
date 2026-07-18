@@ -1,0 +1,25 @@
+# Input — keep folder, ignore content
+input/*
+!input/.gitkeep
+
+# Output — generated files and per-run checkpoints
+output/
+
+.env
+.venv/
+
+# Deck data — lives in a separate data repo, not committed here
+content/decks/
+content/card_types/
+content/vault/
+content/prompts/
+
+# Agent content-hash cache (API responses)
+cache/
+
+# Runtime feedback data (user review actions)
+feedback/
+
+__pycache__/
+*.pyc
+*.ipynb

@@ -1,0 +1,30 @@
+/* Obsidian — dark with warm gold accent */
+:root {
+  --bg:         #0a0a0a;
+  --surface:    #111111;
+  --surface-2:  #141410;
+  --surface-3:  #080808;
+  --border:     #2a2010;
+  --border-sm:  #1e1a08;
+  --text:       #f5e6b0;
+  --muted:      #d4b26a;
+  --dim:        #a08848;
+  --faint:      #6a5830;
+  --badge-bg:   #1c1600;
+  --code-bg:    #050400;
+  --code-text:  #f5e6b0;
+  --code-inline-bg:   #1a1408;
+  --code-inline-text: #d4b26a;
+  --shadow:     0 4px 30px rgba(180,146,0,0.1);
+
+  --bg-card:    #111111;
+  --bg-code:    #050400;
+  --text-dim:   #a08848;
+  --panel:      #141410;
+  --bg-steps:   #0c0a04;
+  --accent:     #6a5010;
+  --accent-lt:  #2a1e00;
+  --accent-md:  #d4b26a;
+  --accent-dim: #4a3808;
+  --accent-dk:  #a08040;
+}

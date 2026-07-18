@@ -1,0 +1,263 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.card, body {
+  background: #0f0f0f;
+  font-family: Inter, system-ui, sans-serif;
+  color: #f0f0f0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ── Front ────────────────────────────────────────────────────────────────── */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 32px 80px;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.task-badge {
+  display: inline-block;
+  background: #2a2a2a;
+  color: #c8c8c8;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+}
+
+.task {
+  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+  font-weight: 400;
+  color: #f0f0f0;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.hint-row {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: #909090;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hint-text { font-style: italic; color: #b0b0b0; }
+.hint-btn {
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 20px;
+  color: #909090;
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 3px 12px;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s;
+}
+.hint-btn:hover { border-color: #555; color: #c8c8c8; }
+
+/* ── Back ─────────────────────────────────────────────────────────────────── */
+.card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 28px 28px 70px;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── Meta chips row ───────────────────────────────────────────────────────── */
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 0.68rem;
+}
+.meta-chip .chip-label {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #707070;
+}
+.meta-chip .chip-value {
+  color: #b0b0b0;
+  font-weight: 400;
+}
+
+/* ── Task recap ───────────────────────────────────────────────────────────── */
+.task-recap {
+  width: 100%;
+  font-size: 0.84rem;
+  color: #a0a0a0;
+  line-height: 1.75;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #222;
+  white-space: pre-wrap;
+}
+
+/* ── Section separator ────────────────────────────────────────────────────── */
+.section-header {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* ── Email block ──────────────────────────────────────────────────────────── */
+.email-block {
+  width: 100%;
+  background: #161616;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  padding: 20px 22px 22px;
+  margin-bottom: 22px;
+}
+
+.email-body {
+  font-size: 0.88rem;
+  color: #e0e0e0;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+/* ── Breakdown block ──────────────────────────────────────────────────────── */
+.breakdown-block {
+  width: 100%;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  margin-bottom: 16px;
+}
+
+/* Breakdown section header */
+.bd-section {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #707070;
+  padding-top: 16px;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  border-top: 1px solid #252525;
+}
+.bd-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+/* Key sentences (▸ bullets) */
+.bd-keysent {
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 9px 13px;
+  font-size: 0.84rem;
+  color: #c8c8c8;
+  line-height: 1.7;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+/* Alternatives (→ bullets) */
+.bd-alt {
+  padding: 6px 0 6px 14px;
+  border-left: 2px solid #2a2a2a;
+  font-size: 0.83rem;
+  color: #b0b0b0;
+  line-height: 1.7;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+/* Vocabulary entries */
+.vocab-entry {
+  background: #191919;
+  border: 1px solid #252525;
+  border-radius: 6px;
+  padding: 9px 13px;
+  margin-bottom: 7px;
+}
+.vocab-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.vocab-word {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+.vocab-pos {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #909090;
+  background: #242424;
+  padding: 1px 7px;
+  border-radius: 3px;
+}
+.vocab-def {
+  font-size: 0.82rem;
+  color: #b0b0b0;
+  line-height: 1.65;
+}
+.vocab-eg {
+  font-size: 0.78rem;
+  color: #909090;
+  font-style: italic;
+  margin-top: 3px;
+  padding-left: 10px;
+  border-left: 2px solid #222;
+}
+
+/* Tone note / plain text */
+.bd-text {
+  font-size: 0.84rem;
+  color: #a0a0a0;
+  line-height: 1.75;
+  margin-bottom: 4px;
+}
+
+/* ── Watermark ────────────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.watermark:hover { color: #aaa; }

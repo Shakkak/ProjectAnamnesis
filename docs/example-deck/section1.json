@@ -1,0 +1,37 @@
+{
+  "name": "Section 1: Basics",
+  "cards": [
+    {
+      "card_type": "qa",
+      "prompt": "What does RAM stand for?",
+      "answer": "Random Access Memory",
+      "details": "RAM is volatile memory — its contents are lost when the computer is powered off.",
+      "hint": "It is the short-term working memory of a computer.",
+      "id": "e26db0d335b7271d"
+    },
+    {
+      "card_type": "mc",
+      "prompt": "Which data structure operates on a Last-In First-Out (LIFO) principle?",
+      "answer": "Stack",
+      "choices": "Queue|Linked List|Binary Tree",
+      "details": "A stack pushes items on top and pops from the top. Think of a stack of plates.",
+      "id": "e26db0d335b7271d"
+    },
+    {
+      "card_type": "qa",
+      "prompt": "What is the time complexity of binary search?",
+      "answer": "O(log n) ; logarithmic time",
+      "details": "Binary search halves the search space on each step, requiring at most log₂(n) comparisons.",
+      "hint": "It requires a sorted array.",
+      "id": "e26db0d335b7271d"
+    },
+    {
+      "card_type": "mc",
+      "prompt": "What keyword is used to define a function in Python?",
+      "answer": "def",
+      "choices": "func|function|fn",
+      "details": "Example: def my_function(): ...",
+      "id": "e26db0d335b7271d"
+    }
+  ]
+}

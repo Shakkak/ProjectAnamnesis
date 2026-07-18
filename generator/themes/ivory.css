@@ -1,0 +1,30 @@
+/* Ivory — warm parchment light theme, serif feel */
+:root {
+  --bg:         #f0ead8;
+  --surface:    #fdfbf3;
+  --surface-2:  #f7f3e6;
+  --surface-3:  #e8e0c8;
+  --border:     #d4c080;
+  --border-sm:  #e8ddb0;
+  --text:       #1a1000;
+  --muted:      #2c2000;
+  --dim:        #6b5000;
+  --faint:      #8a6800;
+  --badge-bg:   #ece4c8;
+  --code-bg:    #1a1000;
+  --code-text:  #f0ead8;
+  --code-inline-bg:   #ece4c8;
+  --code-inline-text: #2c2000;
+  --shadow:     0 2px 16px rgba(180,140,0,0.12);
+
+  --bg-card:    #fdfbf3;
+  --bg-code:    #1a1000;
+  --text-dim:   #6b5000;
+  --panel:      #f7f3e6;
+  --bg-steps:   #e8e0c8;
+  --accent:     #d4b26a;
+  --accent-lt:  #ece4c8;
+  --accent-md:  #8a6800;
+  --accent-dim: #c4a050;
+  --accent-dk:  #6b5000;
+}
