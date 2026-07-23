@@ -216,7 +216,6 @@ In bank mode `--deck` is resolved relative to `--bank`, and the generator automa
 --voice VOICE        Override TTS voice for all card types (see voice options below)
 --theme THEME        Apply a CSS color theme to all card templates (see theme options below)
 --force-regen        Regenerate all audio even if the .mp3 file already exists
---apply-feedback     Exclude cards rejected via the card review UI (reads feedback/<deck-slug>/)
 --retire             Build a *-retired.apkg to tag orphaned cards for deletion in Anki
 
 # Inspection
@@ -244,9 +243,6 @@ In bank mode `--deck` is resolved relative to `--bank`, and the generator automa
 
 # Validate a new card type definition before wiring it to a deck
 ./cli.sh generate --validate-type content/card_types/my-type.json
-
-# Exclude cards your team has rejected in the review UI
-./cli.sh generate --deck content/decks/reflection/ --apply-feedback
 
 # Colab equivalent (same flags, different entry point)
 !python3 /content/ProjectAnamnesis/notebooks/colab_build.py \
@@ -312,17 +308,6 @@ Themes work by appending a `:root { }` CSS variable block after the template's o
 
 ---
 
-## Card review UI
-
-```bash
-docker compose up webapp
-# Open http://localhost:8080
-```
-
-Review generated cards, accept/reject/comment. Feedback is stored in `feedback/` and injected into the next pipeline run for that deck to improve card quality.
-
----
-
 ## Features
 
 | | |
@@ -340,7 +325,6 @@ Review generated cards, accept/reject/comment. Feedback is stored in `feedback/`
 | **Content-hash caching** | Agent 1 results cached by input hash — re-runs skip unchanged chunks |
 | **Resumable pipeline** | Timestamped checkpoints; pick up from any failed step |
 | **Deck Spec persistence** | `deck_spec.json` saved per run — reuse with `--spec` for fast re-runs |
-| **Concept graph** | Interactive D3 graph of concept ↔ card coverage at `/graph` |
 | **Coverage analysis** | `tools/coverage.py` shows which vault concepts have no cards yet |
 | **Docker-native** | Nothing needs installing on the host |
 
@@ -374,7 +358,6 @@ content/                Study data (standalone mode)
   card_types/           Card type definitions
   vault/                Obsidian concept files + index.json + card_index.json
 
-webapp/                 Card review UI (FastAPI + D3 graph)
 tools/                  Dev utilities (index builders, validators, coverage, prune)
 docs/                   Developer documentation
 input/                  Drop source files here

@@ -12,15 +12,3 @@ services:
       # Bank mode: mount your MyAnkiBank clone and set BANK_PATH=/bank
       # - /path/to/MyAnkiBank:/bank:ro
 
-  webapp:
-    build: .
-    command: uvicorn webapp.main:app --host 0.0.0.0 --port 8080 --reload
-    ports:
-      - "8080:8080"
-    env_file:
-      - path: .env
-        required: false
-    volumes:
-      - ./content:/app/content:ro
-      - ./feedback:/app/feedback
-      - ./webapp:/app/webapp
