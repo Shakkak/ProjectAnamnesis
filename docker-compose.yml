@@ -9,6 +9,13 @@ services:
       - ./output:/app/output
       - ./cache:/app/cache
       - ./input:/app/input
+      # Source code — mounted live so edits (including generator/templates/)
+      # take effect immediately, with no `docker compose build app` step.
+      # The image still bakes these in at build time as a fallback for
+      # anyone running the image without this compose file / bind mounts.
+      - ./generator:/app/generator
+      - ./pipeline:/app/pipeline
+      - ./tools:/app/tools
       # Bank mode: mount your MyAnkiBank clone and set BANK_PATH=/bank
       # - /path/to/MyAnkiBank:/bank:ro
 
