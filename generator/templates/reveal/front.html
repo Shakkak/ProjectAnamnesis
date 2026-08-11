@@ -1,12 +1,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap">
 
 <div class="card-front">
-  <div class="label">Question</div>
-  <div class="question">{{Definition}}</div>
+  <div class="task-badge">Question</div>
+  <div class="prompt-block">{{Definition}}</div>
   {{#Extra 2}}
-  <div class="hint">
-    <span class="hint-icon">💡</span>
+  <div class="hint-row">
     <span class="hint-text" id="hint-text" style="display:none">{{Extra 2}}</span>
     <button class="hint-btn" id="hint-btn" onclick="
       document.getElementById('hint-text').style.display='inline';

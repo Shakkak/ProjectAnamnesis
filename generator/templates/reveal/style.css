@@ -2,16 +2,16 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --accent:   #404040;
-  --accent-lt:#252525;
-  --accent-md:#c8c8c8;
-  --text:     #f0f0f0;
-  --text-dim: #909090;
-  --border:   #2a2a2a;
-  --bg:       #0f0f0f;
-  --bg-card:  #1a1a1a;
-  --bg-code:  #111111;
-  --code-text:#e8ecf4;
+  --accent:      #5b8def;
+  --accent-md:   #c8c8c8;
+  --text:        #f0f0f0;
+  --text-dim:    #909090;
+  --border:      #2a2a2a;
+  --bg:          #0f0f0f;
+  --bg-card:     #1a1a1a;
+  --bg-card-2:   #161616;
+  --bg-code:     #111111;
+  --code-text:   #e8ecf4;
 }
 
 .card, body {
@@ -20,6 +20,31 @@
   color: var(--text);
   font-size: 16px;
   line-height: 1.65;
+}
+
+/* ── Shared badge ─────────────────────────────────────────────────────────── */
+.task-badge {
+  display: inline-block;
+  background: #2a2a2a;
+  color: #c8c8c8;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+}
+
+/* ── Shared section header ───────────────────────────────────────────────── */
+.section-header {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 10px;
 }
 
 /* ── Front ────────────────────────────────────────────────────────────────── */
@@ -35,26 +60,15 @@
   position: relative;
 }
 
-.label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-md);
-  border-left: 3px solid var(--accent);
-  padding-left: 8px;
-  margin-bottom: 16px;
-}
-
-.question {
+.prompt-block {
   font-size: clamp(1.15rem, 3.5vw, 1.7rem);
   font-weight: 600;
   color: var(--text);
   line-height: 1.5;
 }
 
-/* ── Hint ─────────────────────────────────────────────────────────────────── */
-.hint {
+/* ── Hint (front) ─────────────────────────────────────────────────────────── */
+.hint-row {
   margin-top: 24px;
   display: flex;
   align-items: center;
@@ -84,61 +98,50 @@
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 28px 32px 64px;
+  padding: 28px 32px 70px;
   max-width: 740px;
   margin: 0 auto;
   position: relative;
 }
 
-.question-recap {
+.prompt-recap {
   font-size: 0.9rem;
   color: var(--text-dim);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
   width: 100%;
 }
 
+/* ── Answer block (accented — the key takeaway) ──────────────────────────── */
 .answer-block {
+  width: 100%;
   background: var(--bg-card);
   border-left: 4px solid var(--accent);
   border-radius: 0 10px 10px 0;
   padding: 16px 20px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.answer-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-md);
-  margin-bottom: 8px;
-}
-
-.answer {
+  margin-bottom: 22px;
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--text);
   line-height: 1.65;
 }
 
-/* ── Steps / extra sections ───────────────────────────────────────────────── */
-.steps, .extra-block, .hint-block {
+/* ── Generic content block (explanation / hint / notes) ──────────────────── */
+.content-block {
   width: 100%;
   font-size: 0.9rem;
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 16px;
   padding: 14px 18px;
-  background: var(--bg-card);
-  border-radius: 8px;
+  background: var(--bg-card-2);
+  border-radius: 10px;
   border: 1px solid var(--border);
 }
 
-/* Code blocks inside details */
+/* Code blocks inside content */
 pre, code {
   font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
   font-size: 0.82rem;
