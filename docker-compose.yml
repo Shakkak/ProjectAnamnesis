@@ -16,6 +16,6 @@ services:
       - ./generator:/app/generator
       - ./pipeline:/app/pipeline
       - ./tools:/app/tools
-      # Bank mode: mount your MyAnkiBank clone and set BANK_PATH=/bank
-      # - /path/to/MyAnkiBank:/bank:ro
+      # Bank mode: mount your deck data folder and set BANK_PATH=/bank
+      # - /path/to/your-bank:/bank:ro
 

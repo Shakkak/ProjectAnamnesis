@@ -23,7 +23,7 @@ Update this file when priorities shift — do not keep parallel lists elsewhere.
 | Deck Spec JSON contract between agents | ✅ complete |
 | Blueprint-based multi-section output from one pipeline run | ✅ complete |
 | Template generation (Agent 2 writes new HTML/CSS when needed) | ✅ complete |
-| MyAnkiBank separate data repo with `--bank` mode | ✅ complete |
+| Separate data repo support with `--bank` mode | ✅ complete |
 
 ---
 

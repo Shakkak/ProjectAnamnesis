@@ -12,8 +12,8 @@ Given a deck folder, this script:
 
 Usage in Colab:
     !git clone https://github.com/Shakkak/ProjectAnamnesis.git
-    !git clone https://github.com/Shakkak/MyAnkiBank.git /content/ProjectAnamnesis/content
-    !python ProjectAnamnesis/notebooks/colab_build.py --deck content/decks/english
+    !git clone https://github.com/YourUser/YourDataRepo.git /content/ProjectAnamnesis/content
+    !python ProjectAnamnesis/notebooks/colab_build.py --deck content/decks/my-deck
 
 The generator automatically checks content/templates/ before its bundled templates,
 so cloning a data repo as content/ is all that's needed — no extra flags.

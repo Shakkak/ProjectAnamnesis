@@ -185,16 +185,16 @@ If you already have card JSON files, use `./cli.sh generate` to build directly â
 
 ### Using an external data repo (bank mode)
 
-If your deck data lives in a separate repository (e.g. MyAnkiBank), point `--bank` at it:
+If your deck data lives outside this repo (for example in your own data repository), point `--bank` at the folder that contains `decks/`, `card_types/` and `templates/`:
 
 ```bash
 ./cli.sh generate \
-  --bank /path/to/MyAnkiBank \
+  --bank /path/to/your-bank \
   --deck decks/reflection \
   --output-dir output/
 
 # Or set BANK_PATH once in your environment
-export BANK_PATH=/path/to/MyAnkiBank
+export BANK_PATH=/path/to/your-bank
 ./cli.sh generate --deck decks/reflection
 ```
 
